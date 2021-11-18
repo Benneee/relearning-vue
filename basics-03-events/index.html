@@ -19,11 +19,17 @@
     <section id="events">
       <h2>Events in Action</h2>
       <button @click="increaseCount(5)">Add 5</button>
-      <button @click="decreaseCount(5)">Reduce 5</button>
+      <!-- Only react to a right click -->
+      <button @click.right="decreaseCount(5)">Reduce 5</button>
       <p>Result: {{ counter }}</p>
 
-      <input type="text" v-on:input="setName" />
-      <p>Your Name: {{ name }}</p>
+      <input type="text" v-on:input="setName" @keyup.enter="confirmInput" />
+      <p>Your Name: {{ confirmedName }}</p>
+
+      <form @submit.prevent="submitForm">
+        <input type="text" />
+        <button type="submit">Sign Up</button>
+      </form>
     </section>
   </body>
 </html>
