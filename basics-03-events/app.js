@@ -1,7 +1,7 @@
 const app = Vue.createApp({
   data() {
     return {
-      counter: 0,
+      counter: 10,
       name: '',
       confirmedName: '',
     };
@@ -13,10 +13,7 @@ const app = Vue.createApp({
     },
 
     decreaseCount(num) {
-      //  I don't want negative numbers
-      if (this.counter >= 1) {
-        this.counter = this.counter - num;
-      }
+      this.counter = this.counter - num;
     },
 
     confirmInput() {
@@ -29,6 +26,10 @@ const app = Vue.createApp({
 
     submitForm() {
       alert('submitted');
+    },
+
+    resetInput() {
+      this.name = '';
     },
   },
 });
