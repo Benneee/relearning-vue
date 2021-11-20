@@ -21,6 +21,7 @@
       <button @click="increaseCount(5)">Add 5</button>
       <!-- Only react to a right click -->
       <button @click.right="decreaseCount(5)">Reduce 5</button>
+      <p v-once>Starting Counter: {{ counter }}</p>
       <p>Result: {{ counter }}</p>
 
       <input type="text" v-on:input="setName" @keyup.enter="confirmInput" />
