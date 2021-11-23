@@ -7,6 +7,12 @@ const app = Vue.createApp({
     };
   },
 
+  computed: {
+    boxAClasses() {
+      return { active: this.boxASelected };
+    },
+  },
+
   methods: {
     boxSelected(box) {
       // To allow toggle, we can assign the value to their opposite since they are originally boolean values
