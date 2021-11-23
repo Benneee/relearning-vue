@@ -4,15 +4,28 @@ const app = Vue.createApp({
       counter: 10,
       name: '',
       confirmedName: '',
+      fullName: '',
     };
   },
 
   computed: {
-    fullName() {
-      if (this.name === '') {
-        return '';
+    // fullName() {
+    //   if (this.name === '') {
+    //     return '';
+    //   }
+    //   return this.name + ' ' + 'Nk';
+    // },
+  },
+
+  watch: {
+    // Whenever the name property above in data changes,
+    // this watcher runs
+    name(value) {
+      if (value === '') {
+        this.fullName = '';
+      } else {
+        value + ' ' + 'Nk';
       }
-      return this.name + ' ' + 'Nk';
     },
   },
 
