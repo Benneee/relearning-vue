@@ -9,12 +9,14 @@ const app = Vue.createApp({
 
   methods: {
     boxSelected(box) {
+      // To allow toggle, we can assign the value to their opposite since they are originally boolean values
       if (box === 'A') {
-        this.boxASelected = true;
+        // this.boxASelected = true;
+        this.boxASelected = !this.boxASelected;
       } else if (box === 'B') {
-        this.boxBSelected = true;
+        this.boxBSelected = !this.boxBSelected;
       } else if (box === 'C') {
-        this.boxCSelected = true;
+        this.boxCSelected = !this.boxCSelected;
       }
     },
   },
