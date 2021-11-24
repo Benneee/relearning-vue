@@ -25,7 +25,9 @@
       </p>
       <ul v-else>
         <!-- <li v-for="goal in goals">{{ goal }}</li> -->
-        <li v-for="(goal, index) in goals">{{ goal }} - {{ index }}</li>
+        <li v-for="(goal, index) in goals" @click="removeGoal(index)">
+          {{ goal }} - {{ index }}
+        </li>
       </ul>
 
       <!--  v-for works with objects too but it outputs the value of the "key-value pair" -->
