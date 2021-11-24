@@ -47,6 +47,19 @@ const app = Vue.createApp({
       this.monsterHealth -= attackValue;
       this.attackPlayer();
     },
+
+    healPlayer() {
+      // Healing the player should increase the round
+      this.currentRound++;
+      const healValue = getRandomValue(8, 20);
+      this.playerHealth =
+        this.playerHealth + healValue > 100
+          ? 100
+          : this.playerHealth + healValue;
+
+      // Monster should also attack after a healing session
+      this.attackPlayer();
+    },
   },
 });
 
