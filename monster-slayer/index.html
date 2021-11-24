@@ -45,9 +45,31 @@
         <button @click="healPlayer">HEAL</button>
         <button @click="surrender">SURRENDER</button>
       </section>
-      <section v-if="!winner" id="log" class="container">
+      <section id="log" class="container">
         <h2>Battle Log</h2>
-        <ul></ul>
+        <ul>
+          <li
+            v-for="msg in logMessages"
+            :key="`log-${msg.actionBy}-${msg.actionValue}`"
+          >
+            <span
+              :class=" {'log--player': msg.actionBy === 'player', 'log--monster': msg.actionBy === 'monster'} "
+            >
+              {{ msg.actionBy === 'player' ? 'Player' : 'Monster' }}
+            </span>
+
+            <span v-if=" msg.actionType === 'heal'">
+              heals himself for
+              <span class="log--heal">{{ msg.actionValue }}</span>
+            </span>
+            <span v-else-if="msg.actionType === 'attack'">
+              attacks and deals
+              <span class="log--damage"> {{ msg.actionValue }} </span>
+            </span>
+
+            <span v-else> surrenders </span>
+          </li>
+        </ul>
       </section>
     </div>
   </body>
