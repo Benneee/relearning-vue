@@ -13,6 +13,7 @@ const app = Vue.createApp({
       monsterHealth: 100,
       currentRound: 0,
       winner: null,
+      logMessages: [],
     };
   },
 
@@ -64,18 +65,21 @@ const app = Vue.createApp({
       this.monsterHealth = 100;
       this.currentRound = 0;
       this.winner = null;
+      this.logMessages = [];
     },
 
     attackMonster() {
       this.currentRound++;
       const attackValue = getRandomValue(5, 12);
       this.monsterHealth -= attackValue;
+      this.addLogMessage('player', 'attack', attackValue);
       this.attackPlayer();
     },
 
     attackPlayer() {
       const attackValue = getRandomValue(8, 15);
       this.playerHealth -= attackValue;
+      this.addLogMessage('monster', 'attack', attackValue);
     },
 
     // The special attack should only be available every 3 rounds
@@ -83,6 +87,7 @@ const app = Vue.createApp({
       this.currentRound++;
       const attackValue = getRandomValue(10, 25);
       this.monsterHealth -= attackValue;
+      this.addLogMessage('player', 'attack', attackValue);
       this.attackPlayer();
     },
 
@@ -95,12 +100,26 @@ const app = Vue.createApp({
           ? 100
           : this.playerHealth + healValue;
 
+      this.addLogMessage('player', 'heal', healValue);
+
       // Monster should also attack after a healing session
       this.attackPlayer();
     },
 
     surrender() {
       this.winner = 'monster';
+      this.addLogMessage('player', 'surrenders', 0);
+    },
+
+    addLogMessage(who, what, value) {
+      const newMessage = {
+        actionBy: who,
+        actionType: what,
+        actionValue: value,
+      };
+
+      // We want the new messages to be on top of the list at all time
+      this.logMessages.unshift(newMessage);
     },
   },
 });
