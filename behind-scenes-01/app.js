@@ -22,6 +22,16 @@ const data = {
   longMessage: 'Hello! World!',
 };
 
+const app2 = Vue.createApp({
+  data() {
+    return {
+      favoriteMeal: 'Pizza',
+    };
+  },
+});
+
+app2.mount('#app2');
+
 // Proxy allows a handler object containing set and get methods
 const handler = {
   set(target, key, value) {

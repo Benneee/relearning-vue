@@ -18,9 +18,15 @@
     </header>
     <section id="app">
       <h2>How Vue Works</h2>
-      <input type="text" @input="saveInput">
+      <input type="text" @input="saveInput" />
       <button @click="setText">Set Text</button>
       <p>{{ message }}</p>
+    </section>
+
+    <section id="app2">
+      <!-- <p>{{ message}}</p> -->
+      <!-- We cannot access data from #app, hence the message in the paragraph above will not show -->
+      <p>{{ favoriteMeal }}</p>
     </section>
   </body>
 </html>
