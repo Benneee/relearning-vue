@@ -1,3 +1,5 @@
+// The functions created outside the scope here makes it easy for us to call the function within the Vue object scope
+
 // Formula for setting a random value between two specific values
 // Math.random() * (diff btw the two values) + (the lower value)
 function getRandomValue(min, max) {
@@ -10,6 +12,7 @@ const app = Vue.createApp({
       playerHealth: 100,
       monsterHealth: 100,
       currentRound: 0,
+      winner: null,
     };
   },
 
@@ -24,6 +27,28 @@ const app = Vue.createApp({
 
     canUseSpecialAttack() {
       return this.currentRound % 3 !== 0;
+    },
+  },
+
+  watch: {
+    playerHealth(value) {
+      if (value <= 0 && this.monsterHealth <= 0) {
+        //   We have a draw
+        this.winner = 'draw';
+      } else if (value <= 0) {
+        //   Player lost
+        this.winner = 'monster';
+      }
+    },
+
+    monsterHealth(value) {
+      if (value <= 0 && this.playerHealth <= 0) {
+        //   We have a draw
+        this.winner = 'draw';
+      } else if (value <= 0) {
+        //   Monster lost
+        this.winner = 'player';
+      }
     },
   },
 

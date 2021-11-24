@@ -17,19 +17,25 @@
       <h1>Monster Slayer</h1>
     </header>
     <div id="game">
-      <section id="monster" class="container">
+      <section id="monster" class="container" v-if="!winner">
         <h2>Monster Health</h2>
         <div class="healthbar">
           <div class="healthbar__value" :style="monsterHealthBarStyles"></div>
         </div>
       </section>
-      <section id="player" class="container">
+      <section id="player" class="container" v-if="!winner">
         <h2>Your Health</h2>
         <div class="healthbar">
           <div class="healthbar__value" :style="playerHealthBarStyles"></div>
         </div>
       </section>
-      <section id="controls">
+      <section v-if="winner" class="container">
+        <h2>Game Over!</h2>
+        <h3 v-if="winner === 'monster'">You lost!</h3>
+        <h3 v-else-if="winner === 'player'">You won!</h3>
+        <h3 v-else>It's a draw</h3>
+      </section>
+      <section v-else id="controls">
         <button @click="attackMonster">ATTACK</button>
         <button :disabled="canUseSpecialAttack" @click="specialAttackMonster">
           SPECIAL ATTACK
@@ -37,7 +43,7 @@
         <button @click="healPlayer">HEAL</button>
         <button>SURRENDER</button>
       </section>
-      <section id="log" class="container">
+      <section v-if="!winner" id="log" class="container">
         <h2>Battle Log</h2>
         <ul></ul>
       </section>
