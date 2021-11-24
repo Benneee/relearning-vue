@@ -23,8 +23,28 @@
       <p v-if="goals.length === 0">
         No goals have been added yet - please start adding some!
       </p>
+      <ul v-else>
+        <!-- <li v-for="goal in goals">{{ goal }}</li> -->
+        <li
+          v-for="(goal, index) in goals"
+          :key="goal"
+          @click="removeGoal(index)"
+        >
+          <p>{{ goal }} - {{ index }}</p>
+          <!--To prevent the list item from removing due to our "removeGoal" method, we have to stop the event propagation using the stop modifier  -->
+          <input type="text" @click.stop />
+        </li>
+      </ul>
+
+      <!--  v-for works with objects too but it outputs the value of the "key-value pair" -->
       <ul>
-        <li>Goal</li>
+        <!-- <li v-for="value in { name: 'Max', age: 31 }">{{ value }}</li> -->
+
+        <!-- To get the key -->
+        <!-- <li v-for="(value, key) in { name: 'Max', age: 31 }">
+          {{ key }}: {{ value }}
+        </li> -->
+        <!-- <li v-for="num in 10">{{ num }}</li> -->
       </ul>
     </section>
   </body>
