@@ -1,3 +1,5 @@
+// Formula for setting a random value between two specific values
+// Math.random() * (diff btw the two values) + (the lower value)
 function getRandomValue(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
@@ -10,13 +12,21 @@ const app = Vue.createApp({
     };
   },
 
+  computed: {
+    monsterHealthBarStyles() {
+      return { width: this.monsterHealth + '%' };
+    },
+
+    playerHealthBarStyles() {
+      return { width: this.playerHealth + '%' };
+    },
+  },
+
   methods: {
     attackMonster() {
-      // Formula for setting a random value between two specific values
-      // Math.random() * (diff btw the two values) + (the lower value)
       const attackValue = getRandomValue(5, 12);
       this.monsterHealth -= attackValue;
-      this.attackMonster();
+      this.attackPlayer();
     },
 
     attackPlayer() {
