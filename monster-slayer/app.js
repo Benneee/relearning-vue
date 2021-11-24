@@ -9,6 +9,7 @@ const app = Vue.createApp({
     return {
       playerHealth: 100,
       monsterHealth: 100,
+      currentRound: 0,
     };
   },
 
@@ -20,10 +21,15 @@ const app = Vue.createApp({
     playerHealthBarStyles() {
       return { width: this.playerHealth + '%' };
     },
+
+    canUseSpecialAttack() {
+      return this.currentRound % 3 !== 0;
+    },
   },
 
   methods: {
     attackMonster() {
+      this.currentRound++;
       const attackValue = getRandomValue(5, 12);
       this.monsterHealth -= attackValue;
       this.attackPlayer();
@@ -32,6 +38,27 @@ const app = Vue.createApp({
     attackPlayer() {
       const attackValue = getRandomValue(8, 15);
       this.playerHealth -= attackValue;
+    },
+
+    // The special attack should only be available every 3 rounds
+    specialAttackMonster() {
+      this.currentRound++;
+      const attackValue = getRandomValue(10, 25);
+      this.monsterHealth -= attackValue;
+      this.attackPlayer();
+    },
+
+    healPlayer() {
+      // Healing the player should increase the round
+      this.currentRound++;
+      const healValue = getRandomValue(8, 20);
+      this.playerHealth =
+        this.playerHealth + healValue > 100
+          ? 100
+          : this.playerHealth + healValue;
+
+      // Monster should also attack after a healing session
+      this.attackPlayer();
     },
   },
 });
