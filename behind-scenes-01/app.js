@@ -2,7 +2,7 @@ const app = Vue.createApp({
   data() {
     return {
       currentUserInput: '',
-      message: 'Vue is great!',
+      message: 'Vue is the greatest!',
     };
   },
   methods: {
@@ -13,6 +13,31 @@ const app = Vue.createApp({
       // this.message = this.currentUserInput;
       this.message = this.$refs.userText.value;
     },
+  },
+
+  beforeCreate() {
+    console.log('beforeCreate()');
+  },
+
+  created() {
+    console.log('created()');
+  },
+
+  beforeMount() {
+    console.log('beforeMount()');
+  },
+
+  mounted() {
+    console.log('mounted()');
+  },
+
+  // The two cycles only run when a change occurs in the app
+  beforeUpdate() {
+    console.log('beforeUpdate()');
+  },
+
+  updated() {
+    console.log('updated()');
   },
 });
 
