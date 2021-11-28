@@ -1,43 +1,3 @@
-<template>
-  <section>
-    <header>
-      <h1>My Friends</h1>
-    </header>
-    <ul v-for="friend in friends" :key="friend.id">
-      <FriendContact :friend="friend" />
-    </ul>
-  </section>
-</template>
-
-<script>
-import FriendContact from '../components/FriendContact.vue';
-export default {
-  components: {
-    FriendContact,
-  },
-  data() {
-    return {
-      friends: [
-        {
-          id: 'manuel',
-          name: 'Manuel Lorenz',
-          phone: '01234 5678 991',
-          email: 'manuel@localhost.com',
-        },
-        {
-          id: 'julie',
-          name: 'Julie Jones',
-          phone: '09876 543 221',
-          email: 'julie@localhost.com',
-        },
-      ],
-    };
-  },
-};
-</script>
-
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Jost&display=swap');
 * {
   box-sizing: border-box;
 }
@@ -101,4 +61,3 @@ header {
   border-color: #ec3169;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.26);
 }
-</style>
