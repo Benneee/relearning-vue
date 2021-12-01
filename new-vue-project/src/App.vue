@@ -5,7 +5,11 @@
     </header>
     <NewFriend @create-new-friend="createNewFriend" />
     <ul v-for="friend in friends" :key="friend.id">
-      <FriendContact :friend="friend" @toggle-favorite="toggleFavoriteStatus" />
+      <FriendContact
+        :friend="friend"
+        @toggle-favorite="toggleFavoriteStatus"
+        @delete-friend="deleteFriend"
+      />
     </ul>
   </section>
 </template>
@@ -46,8 +50,13 @@ export default {
     },
 
     createNewFriend(data) {
-      // createNewFriend
+      // Create new friend
       this.friends.push(data);
+    },
+
+    deleteFriend(id) {
+      // Delete friend
+      this.friends = this.friends.filter((friend) => friend.id !== id);
     },
   },
 };
