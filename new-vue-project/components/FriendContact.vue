@@ -23,6 +23,20 @@ export default {
       required: true,
     },
   },
+  // Mainly for documentation purposes
+  emits: ['toggle-favorite'],
+  // emits: {
+  //   'toggle-favorite': (id) => {
+  //     if (id) {
+  //       console.log('We good!');
+  //       return true;
+  //     } else {
+  //       console.warn('ID argument is missing!');
+  //       return false;
+  //     }
+  //   },
+  // },
+
   data() {
     return {
       detailsAreVisible: false,
