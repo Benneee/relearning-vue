@@ -6,7 +6,6 @@
       :id="topic.id"
       :topic-name="topic.title"
       :description="topic.description"
-      @select-topic="$emit('select-topic', $event)"
     />
   </ul>
 </template>
@@ -21,6 +20,5 @@ export default {
   },
 
   inject: ['topics'],
-  emits: ['select-topic'],
 };
 </script>
