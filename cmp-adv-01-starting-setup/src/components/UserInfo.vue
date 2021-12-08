@@ -4,7 +4,7 @@
       <h3>{{ fullName }}</h3>
       <BaseBadge :type="role" :caption="role.toUpperCase()" />
     </template>
-    <template>
+    <template v-slot:default>
       <p>{{ infoText }}</p>
     </template>
   </base-card>
@@ -22,11 +22,3 @@ export default {
   props: ['fullName', 'infoText', 'role'],
 };
 </script>
-
-<style scoped>
-section header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-</style>
