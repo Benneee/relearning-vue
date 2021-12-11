@@ -4,7 +4,9 @@
       <base-card>
         <header>
           <h3>{{ resource.title }}</h3>
-          <base-button :mode="'flat'">Delete</base-button>
+          <base-button :mode="'flat'" @click="deleteResource(resource.id)"
+            >Delete</base-button
+          >
         </header>
         <p>{{ resource.description }}</p>
         <nav><a target="_blank" :href="resource.link">View Resource</a></nav>
@@ -18,6 +20,8 @@ import BaseCard from '@/components/base/BaseCard';
 import BaseButton from '@/components/base/BaseButton';
 export default {
   name: 'LearningResourceItem',
+
+  inject: ['deleteResource'],
 
   components: {
     BaseCard,
