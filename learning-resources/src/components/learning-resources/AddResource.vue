@@ -1,14 +1,15 @@
 <template>
   <base-card>
-    <form>
+    <form @submit.prevent="submitData">
       <div class="form-control">
         <label for="title">Title</label>
-        <input type="text" name="title" id="title" />
+        <input type="text" ref="titleInput" name="title" id="title" />
       </div>
 
       <div class="form-control">
         <label for="description">Description</label>
         <textarea
+          ref="descInput"
           name="description"
           id="description"
           cols="30"
@@ -18,7 +19,7 @@
 
       <div class="form-control">
         <label for="link">Link</label>
-        <input type="url" id="link" name="link" />
+        <input ref="linkInput" type="url" id="link" name="link" />
       </div>
 
       <div>
@@ -33,10 +34,21 @@ import BaseCard from '@/components/base/BaseCard.vue';
 import BaseButton from '@/components/base/BaseButton.vue';
 export default {
   name: 'AddResource',
+  inject: ['addResource'],
 
   components: {
     BaseCard,
     BaseButton,
+  },
+
+  methods: {
+    submitData() {
+      const title = this.$refs.titleInput.value;
+      const description = this.$refs.descInput.value;
+      const link = this.$refs.linkInput.value;
+
+      this.addResource(title, description, link);
+    },
   },
 };
 </script>

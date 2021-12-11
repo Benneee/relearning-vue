@@ -7,7 +7,7 @@
           <base-button :mode="'flat'">Delete</base-button>
         </header>
         <p>{{ resource.description }}</p>
-        <nav><a :href="resource.link">View Resource</a></nav>
+        <nav><a target="_blank" :href="resource.link">View Resource</a></nav>
       </base-card>
     </li>
   </section>
