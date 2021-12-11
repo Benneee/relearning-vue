@@ -1,7 +1,7 @@
 <template>
   <ul>
     <LearningResourceItem
-      v-for="resource in storedResources"
+      v-for="resource in resources"
       :key="`resource-${resource.id}`"
       :resource="resource"
     />
@@ -14,15 +14,10 @@ import LearningResourceItem from '@/components/learning-resources/LearningResour
 export default {
   name: 'StoredResources',
 
+  inject: ['resources'],
+
   components: {
     LearningResourceItem,
-  },
-
-  props: {
-    storedResources: {
-      type: Array,
-      required: true,
-    },
   },
 };
 </script>
