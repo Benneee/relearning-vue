@@ -14,7 +14,9 @@
         Add New Resource</base-button
       >
     </base-card>
-    <Component :is="selectedTab" />
+    <keep-alive>
+      <Component :is="selectedTab" />
+    </keep-alive>
   </section>
 </template>
 
@@ -67,12 +69,24 @@ export default {
   provide() {
     return {
       resources: this.storedResources,
+      addResource: this.addResource,
     };
   },
 
   methods: {
     selectComponent(tab) {
       this.selectedTab = tab;
+    },
+
+    addResource(title, description, link) {
+      const newResource = {
+        id: new Date().toISOString(),
+        title,
+        description,
+        link,
+      };
+      this.storedResources.unshift(newResource);
+      this.selectedTab = 'stored-resources';
     },
   },
 };
