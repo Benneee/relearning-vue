@@ -1,6 +1,6 @@
 <template>
   <section>
-    <TheHeader :title="'Remember Me'" />
+    <TheHeader :title="'RememberMe'" />
     <StoredResources :storedResources="storedResources" />
   </section>
 </template>

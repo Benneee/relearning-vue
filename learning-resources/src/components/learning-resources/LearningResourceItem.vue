@@ -4,7 +4,7 @@
       <base-card>
         <header>
           <h3>{{ resource.title }}</h3>
-          <button>Delete</button>
+          <base-button :mode="'flat'">Delete</base-button>
         </header>
         <p>{{ resource.description }}</p>
         <nav><a :href="resource.link">View Resource</a></nav>
@@ -15,11 +15,13 @@
 
 <script>
 import BaseCard from '@/components/base/BaseCard';
+import BaseButton from '@/components/base/BaseButton';
 export default {
   name: 'LearningResourceItem',
 
   components: {
     BaseCard,
+    BaseButton,
   },
 
   props: {
