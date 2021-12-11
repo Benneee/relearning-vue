@@ -19,7 +19,9 @@
     <!-- </course-goals> -->
     <button @click="setSelectedComponent('active-goals')">Active Goals</button>
     <button @click="setSelectedComponent('manage-goals')">Manage Goals</button>
-    <component :is="selectedComponent"></component>
+    <keep-alive>
+      <component :is="selectedComponent"></component>
+    </keep-alive>
     <!-- <ActiveGoals />
     <ManageGoals /> -->
   </div>
