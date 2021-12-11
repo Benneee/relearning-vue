@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import BaseBadge from './BaseBadge.vue';
-import BaseCard from './BaseCard.vue';
+import BaseBadge from './base/BaseBadge.vue';
+import BaseCard from './base/BaseCard.vue';
 export default {
   name: 'UserInfo',
   components: {
