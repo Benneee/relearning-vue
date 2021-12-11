@@ -1,5 +1,8 @@
 <template>
-  <h2>Manage Goals</h2>
+  <section>
+    <h2>Manage Goals</h2>
+    <input type="text" />
+  </section>
 </template>
 
 <script>
