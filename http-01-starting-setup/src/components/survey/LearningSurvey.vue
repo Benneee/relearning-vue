@@ -41,6 +41,7 @@
         <p v-if="invalidInput">
           One or more input fields are invalid. Please check your provided data.
         </p>
+        <p v-if="errorMessage">{{ errorMessage }}</p>
         <div>
           <base-button>Submit</base-button>
         </div>
@@ -64,6 +65,7 @@ export default {
       enteredName: '',
       chosenRating: null,
       invalidInput: false,
+      errorMessage: null,
     };
   },
   // emits: ['survey-submit'],
@@ -92,7 +94,20 @@ export default {
             rating: this.chosenRating,
           }),
         }
-      );
+      )
+        .then((response) => {
+          if (response.ok) {
+            console.log('res: ', response);
+          } else {
+            // The usage of "throw" here makes a 400-ish error reach the catch block,
+            // in actual sense, errors like that don't reach the catch block
+            throw new Error('Could not save data');
+          }
+        })
+        .catch((error) => {
+          console.log('error: ', error);
+          this.errorMessage = error.message;
+        });
 
       this.enteredName = '';
       this.chosenRating = null;
