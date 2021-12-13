@@ -1,13 +1,16 @@
 <template>
-  <ul>
-    <teams-item
-      v-for="team in teams"
-      :key="team.id"
-      :team-id="team.id"
-      :name="team.name"
-      :member-count="team.members.length"
-    ></teams-item>
-  </ul>
+  <section>
+    <router-view></router-view>
+    <ul>
+      <teams-item
+        v-for="team in teams"
+        :key="team.id"
+        :team-id="team.id"
+        :name="team.name"
+        :member-count="team.members.length"
+      ></teams-item>
+    </ul>
+  </section>
 </template>
 
 <script>
