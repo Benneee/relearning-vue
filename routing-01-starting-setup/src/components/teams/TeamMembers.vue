@@ -9,6 +9,8 @@
         :role="member.role"
       ></user-item>
     </ul>
+
+    <router-link to="/teams/t3">Go To Team 3</router-link>
   </section>
 </template>
 
@@ -31,14 +33,29 @@ export default {
 
   inject: ['users', 'teams'],
 
+  props: {
+    teamId: {
+      type: String,
+      required: true,
+    },
+  },
+
   created() {
-    this.getTeamAndMembers();
+    this.getTeamAndMembers(this.teamId);
+  },
+
+  watch: {
+    teamId(newId) {
+      this.getTeamAndMembers(newId);
+    },
   },
 
   methods: {
-    getTeamAndMembers() {
-      const teamId = this.$route.params.teamId;
+    getTeamAndMembers(teamId) {
       const selectedTeam = this.teams.find((team) => team.id === teamId);
+      if (!selectedTeam) {
+        return;
+      }
 
       const members = selectedTeam.members;
       const selectedMembers = [];
