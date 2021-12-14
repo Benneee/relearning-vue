@@ -18,6 +18,12 @@ export default {
     UserItem,
   },
   inject: ['users'],
+  beforeRouteEnter(to, from, next) {
+    console.log('beforeRouteEnter');
+    console.log('to: ', to);
+    console.log('from: ', from);
+    next();
+  },
 };
 </script>
 
