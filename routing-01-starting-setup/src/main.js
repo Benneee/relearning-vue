@@ -68,6 +68,12 @@ router.beforeEach((to, from, next) => {
   //   }
 });
 
+router.afterEach((to, from) => {
+  // Useful for sending analytics data
+  // Cannot use this cycle to control navigation or change what the user sees on the screen
+  console.log('to: ', to, 'from: ', from);
+});
+
 const app = createApp(App);
 
 app.use(router);
