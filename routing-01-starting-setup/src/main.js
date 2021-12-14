@@ -39,6 +39,27 @@ const router = createRouter({
     },
   ],
   linkActiveClass: 'active',
+
+  scrollBehavior(to, from, savedPosition) {
+    // console.log('to: ', to, 'from: ', from, 'saved: ', savedPosition);
+    if (savedPosition) {
+      return savedPosition;
+    }
+    return { left: 0, top };
+  },
+});
+
+router.beforeEach((to, from, next) => {
+  //   console.log('Global beforeEach');
+  //   console.log('to: ', to, 'from: ', from);
+  // next();
+  // next(false); // cancels the navigation
+  //   if (to.name === 'team-members') {
+  next();
+  //   } else {
+  // You can also pass a string of an existing route we want to go to
+  // next({ name: 'team-members', params: { teamId: 't2' } });
+  //   }
 });
 
 const app = createApp(App);
