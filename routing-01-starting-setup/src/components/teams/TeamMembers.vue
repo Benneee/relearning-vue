@@ -45,6 +45,14 @@ export default {
     console.log('query: ', this.$route.query);
   },
 
+  // Mainly used in reusable components
+  beforeRouteUpdate(to, from, next) {
+    console.log('beforeRouteEnter');
+    console.log('to: ', to);
+    console.log('from: ', from);
+    next();
+  },
+
   watch: {
     teamId(newId) {
       this.getTeamAndMembers(newId);
