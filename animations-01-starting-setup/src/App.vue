@@ -5,8 +5,13 @@
       <button @click="animateBlock">Animate</button>
     </div>
     <div class="container">
-      <transition>
+      <!-- <transition>
       <p v-if="paraIsVisible">This is only sometimes visible....</p>
+      </transition> -->
+      <!-- For cases when we have multiple transition components in the template -->
+      <!-- We add the "name" attribute so vue.js can identify the customised classes for the transition -->
+      <transition name="para">
+        <p v-if="paraIsVisible">This is only sometimes visible....</p>
       </transition>
       <button @click="toggleParagraph">Toggle paragraph</button>
     </div>
@@ -110,7 +115,12 @@ button:active {
   transform: translateY(-30px);
 } */
 
-.v-enter-active {
+/* .v-enter-active {
+  animation: slide-scale 0.3s ease-out;
+} */
+
+/* For when we have several transition components in the template */
+.para-enter-active {
   animation: slide-scale 0.3s ease-out;
 }
 
@@ -125,7 +135,12 @@ button:active {
   transform: translateY(0);
 } */
 
-.v-leave-active {
+/* .v-leave-active {
+  animation: slide-scale 0.3s ease-out;
+} */
+
+/* For when we have several transition components in the template */
+.para-leave-active {
   animation: slide-scale 0.3s ease-out;
 }
 
