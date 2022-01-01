@@ -10,7 +10,14 @@
       </transition> -->
       <!-- For cases when we have multiple transition components in the template -->
       <!-- We add the "name" attribute so vue.js can identify the customised classes for the transition -->
-      <transition name="para">
+      <transition name="para" 
+          @before-enter="beforeEnter" 
+          @enter="enter"
+          @after-enter="afterEnter"
+          @before-leave="beforeLeave"
+          @leave="leave"
+          @after-leave="afterLeave"
+      >
         <p v-if="paraIsVisible">This is only sometimes visible....</p>
       </transition>
       <button @click="toggleParagraph">Toggle paragraph</button>
@@ -54,6 +61,30 @@ export default {
   },
 
   methods: {
+    beforeEnter(element) {
+      console.log('before enter: ', element)
+    },
+
+    beforeLeave(element) {
+      console.log('before leave: ', element)
+    },
+
+    enter(element) {
+      console.log('enter: ', element)
+    },
+
+    afterEnter(element) {
+      console.log('after enter: ', element)
+    },
+
+    leave(element) {
+      console.log('leave: ', element)
+    },
+
+    afterLeave(element) {
+      console.log('after leave: ', element)
+    },
+
     animateBlock() {
       this.animatedBlock = true;
     },
