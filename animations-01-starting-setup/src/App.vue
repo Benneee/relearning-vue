@@ -1,6 +1,9 @@
 <template>
   <section>
     <div class="container">
+      <UsersList />
+    </div>
+    <div class="container">
       <div class="block" :class="{ animate: animatedBlock }"></div>
       <button @click="animateBlock">Animate</button>
     </div>
@@ -48,10 +51,12 @@
 
 <script>
 import BaseModal from './components/BaseModal.vue';
+import UsersList from './components/UsersList.vue';
 
 export default {
   components: {
     BaseModal,
+    UsersList
   },
 
   data() {
