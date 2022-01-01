@@ -1,19 +1,25 @@
 <template>
-  <section>
-    <div class="container">
+    <router-view v-slot="slotProps">
+        <transition name="fade-btn" mode="out-in">
+          <component :is="slotProps.Component"></component>
+        </transition>
+    </router-view>
+
+  <!-- <section> -->
+    <!-- <div class="container">
       <UsersList />
     </div>
     <div class="container">
       <div class="block" :class="{ animate: animatedBlock }"></div>
       <button @click="animateBlock">Animate</button>
-    </div>
-    <div class="container">
+    </div> -->
+    <!-- <div class="container"> -->
       <!-- <transition>
       <p v-if="paraIsVisible">This is only sometimes visible....</p>
       </transition> -->
       <!-- For cases when we have multiple transition components in the template -->
       <!-- We add the "name" attribute so vue.js can identify the customised classes for the transition -->
-      <transition 
+      <!-- <transition 
           :css="false"
           @before-enter="beforeEnter" 
           @enter="enter"
@@ -27,8 +33,8 @@
         <p v-if="paraIsVisible">This is only sometimes visible....</p>
       </transition>
       <button @click="toggleParagraph">Toggle paragraph</button>
-    </div>
-    <div class="container">
+    </div> -->
+    <!-- <div class="container">
       <transition name="fade-btn" mode="out-in">
         <button @click="showUsers" v-if="!usersAreVisible">
           Show Users
@@ -45,18 +51,18 @@
 
     <div class="container">
       <button @click="showDialog">Show Dialog</button>
-    </div>
-  </section>
+    </div> -->
+  <!-- </section> -->
 </template>
 
 <script>
-import BaseModal from './components/BaseModal.vue';
-import UsersList from './components/UsersList.vue';
+// import BaseModal from './components/BaseModal.vue';
+// import UsersList from './components/UsersList.vue';
 
 export default {
   components: {
-    BaseModal,
-    UsersList
+    // BaseModal,
+    // UsersList
   },
 
   data() {
@@ -257,6 +263,14 @@ button:active {
 .fade-btn-enter-to, 
 .fade-btn-leave-from {
   opacity: 1;
+}
+
+.route-enter-active {
+  animation: slide-scale 0.4s ease-out;
+}
+
+.route-leave-active {
+  animation: slide-scale 0.4s ease-in;
 }
 
 @keyframes slide-scale {
