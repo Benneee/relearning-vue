@@ -10,7 +10,8 @@
       </transition> -->
       <!-- For cases when we have multiple transition components in the template -->
       <!-- We add the "name" attribute so vue.js can identify the customised classes for the transition -->
-      <transition name="para" 
+      <transition 
+          :css="false"
           @before-enter="beforeEnter" 
           @enter="enter"
           @after-enter="afterEnter"
