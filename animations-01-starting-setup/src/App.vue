@@ -17,6 +17,8 @@
           @before-leave="beforeLeave"
           @leave="leave"
           @after-leave="afterLeave"
+          @enter-cancelled="enterCancelled"
+          @leave-cancelled="leaveCancelled"
       >
         <p v-if="paraIsVisible">This is only sometimes visible....</p>
       </transition>
@@ -56,33 +58,67 @@ export default {
       animatedBlock: false,
       dialogIsVisible: false,
       paraIsVisible: false,
-      usersAreVisible: false
+      usersAreVisible: false,
+      enterInterval: null,
+      leaveInterval: null
     };
   },
 
   methods: {
     beforeEnter(element) {
       console.log('before enter: ', element)
+      element.style.opacity = 0;
     },
 
-    beforeLeave(element) {
-      console.log('before leave: ', element)
-    },
-
-    enter(element) {
+    enter(element, done) {
       console.log('enter: ', element)
+      let round = 1
+      this.enterInterval = setInterval(() => {
+        element.style.opacity = round * 0.01
+        round++
+
+        if (round > 100) {
+          clearInterval(this.enterInterval)
+          done()
+        }
+      }, 20)
     },
 
     afterEnter(element) {
       console.log('after enter: ', element)
     },
 
-    leave(element) {
+    beforeLeave(element) {
+      console.log('before leave: ', element)
+      element.style.opacity = 1;
+    },
+
+    leave(element, done) {
       console.log('leave: ', element)
+      let round = 1
+      this.leaveInterval = setInterval(() => {
+        element.style.opacity = 1 - round * 0.01
+        round++
+
+        if (round > 100) {
+          clearInterval(this.leaveInterval)
+          done()
+        }
+      }, 20)
     },
 
     afterLeave(element) {
       console.log('after leave: ', element)
+    },
+
+    enterCancelled() {
+      console.log('enter-cancelled')
+      clearInterval(this.enterInterval)
+    },
+
+    leaveCancelled() {
+      console.log('enter-cancelled')
+      clearInterval(this.leaveInterval)
     },
 
     animateBlock() {
@@ -171,9 +207,9 @@ button:active {
 } */
 
 /* For when we have several transition components in the template */
-.para-enter-active {
+/* .para-enter-active {
   animation: slide-scale 0.3s ease-out;
-}
+} */
 
 /* .v-enter-to {
   opacity: 1;
@@ -191,9 +227,9 @@ button:active {
 } */
 
 /* For when we have several transition components in the template */
-.para-leave-active {
+/* .para-leave-active {
   animation: slide-scale 0.3s ease-out;
-}
+} */
 
 /* .v-leave-to {
   opacity: 0;
