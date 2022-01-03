@@ -5,6 +5,8 @@ import App from './App.vue';
 
 // This module will have the same items peculiar to a createStore object
 const counterModule = {
+    namespaced: true,
+    
     state() {
         return {
             counter: 0,
@@ -59,7 +61,7 @@ const store = createStore({
     modules: {
         numbers: counterModule
     },
-    
+
     state() {
         return {
             isLoggedIn: false

@@ -37,7 +37,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(['increase']),
+    ...mapActions('numbers', ['increase']),
 
     // addOne() {
         // this.$store.commit('increase', { value: 10 })

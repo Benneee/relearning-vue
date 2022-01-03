@@ -15,7 +15,7 @@ export default {
         //     this.$store.dispatch('increment')
         // }
 
-        ...mapActions(['increment', 'increase']),
+        ...mapActions('numbers', ['increment', 'increase']),
 
         increaseBy(amount) {
             return this.increase({ value: amount })
