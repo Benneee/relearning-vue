@@ -2,7 +2,7 @@
   <base-container title="Vuex">
     <TheCounter />
     <FavouriteValue />
-    <button @click="addOne">Add 10</button>
+    <button @click="addOne">Add 20</button>
     <ChangeCounter />
   </base-container>
 </template>
