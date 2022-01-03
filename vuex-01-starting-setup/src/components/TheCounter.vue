@@ -14,7 +14,7 @@ export default {
         // }
 
         // This grants the component access to the finalCounter getter immediately
-        ...mapGetters(['finalCounter'])
+        ...mapGetters('numbers', ['finalCounter'])
     },
 }
 </script>
