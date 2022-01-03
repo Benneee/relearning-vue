@@ -6,7 +6,8 @@ import App from './App.vue';
 const store = createStore({
     state() {
         return {
-            counter: 0
+            counter: 0,
+            isLoggedIn: false
         }
     },
 
@@ -18,6 +19,14 @@ const store = createStore({
         increase(state, payload) {
             state.counter = state.counter + payload.value;
         },
+
+        logUserIn(state) {
+            state.isLoggedIn = true
+        },
+
+        logUserOut(state) {
+            state.isLoggedIn = false
+        }
     },
 
     getters: {
@@ -36,6 +45,10 @@ const store = createStore({
                 return 100
             }
             return finalCounter
+        },
+
+        isLoggedInState(state) {
+            return state.isLoggedIn
         }
     },
 
@@ -50,6 +63,14 @@ const store = createStore({
 
         increase(context, payload) {
             context.commit('increase', payload)
+        },
+
+        logUserIn(context) {
+            context.commit('logUserIn')
+        },
+
+        logUserOut(context) {
+            context.commit('logUserOut')
         }
     }
 })
