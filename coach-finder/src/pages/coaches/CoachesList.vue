@@ -8,9 +8,7 @@
       </div>
       <ul v-if="hasCoaches">
         List of coaches
-        <li v-for="coach of filteredCoaches" :key="coach.id">
-          {{ coach.firstName }}
-        </li>
+        <CoachItem v-for="coach in coaches" :key="coach.id" :coach="coach" />
       </ul>
       <h3 v-else>No coaches found</h3>
     </div>
@@ -19,8 +17,10 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import CoachItem from '../../components/coaches/CoachItem.vue';
 
 export default {
+  components: { CoachItem },
   name: 'CoachesList',
 
   computed: {
@@ -33,4 +33,15 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+}
+</style>
