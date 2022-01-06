@@ -2,15 +2,16 @@
   <section>
     <div>Filter</div>
     <div>
-      <div class="controls">
-        <button>Refresh</button>
-        <router-link to="/register">Register as coach </router-link>
-      </div>
-      <ul v-if="hasCoaches">
-        List of coaches
-        <CoachItem v-for="coach in coaches" :key="coach.id" :coach="coach" />
-      </ul>
-      <h3 v-else>No coaches found</h3>
+      <base-card>
+        <div class="controls">
+          <base-button mode="outline">Refresh</base-button>
+          <base-button link to="/register">Register as coach </base-button>
+        </div>
+        <ul v-if="hasCoaches">
+          <CoachItem v-for="coach in coaches" :key="coach.id" :coach="coach" />
+        </ul>
+        <h3 v-else>No coaches found</h3>
+      </base-card>
     </div>
   </section>
 </template>
