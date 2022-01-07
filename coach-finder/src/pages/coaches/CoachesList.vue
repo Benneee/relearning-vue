@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div>Filter</div>
+    <CoachFilter @change-filter="setFilters" />
     <div>
       <base-card>
         <div class="controls">
@@ -8,7 +8,11 @@
           <base-button link to="/register">Register as coach </base-button>
         </div>
         <ul v-if="hasCoaches">
-          <CoachItem v-for="coach in coaches" :key="coach.id" :coach="coach" />
+          <CoachItem
+            v-for="coach in filteredCoaches"
+            :key="coach.id"
+            :coach="coach"
+          />
         </ul>
         <h3 v-else>No coaches found</h3>
       </base-card>
@@ -19,16 +23,44 @@
 <script>
 import { mapGetters } from 'vuex';
 import CoachItem from '../../components/coaches/CoachItem.vue';
+import CoachFilter from './CoachFilter.vue';
 
 export default {
-  components: { CoachItem },
+  components: { CoachItem, CoachFilter },
   name: 'CoachesList',
+
+  data() {
+    return {
+      activeFilters: {
+        frontend: true,
+        backend: true,
+        career: true,
+      },
+    };
+  },
 
   computed: {
     ...mapGetters('coaches', ['coaches', 'hasCoaches']),
 
     filteredCoaches() {
-      return this.coaches;
+      return this.coaches.filter((coach) => {
+        if (this.activeFilters.frontend && coach.areas.includes('frontend')) {
+          return true;
+        }
+        if (this.activeFilters.backend && coach.areas.includes('backend')) {
+          return true;
+        }
+        if (this.activeFilters.career && coach.areas.includes('career')) {
+          return true;
+        }
+        return false;
+      });
+    },
+  },
+
+  methods: {
+    setFilters(updatedFilters) {
+      this.activeFilters = updatedFilters;
     },
   },
 };
