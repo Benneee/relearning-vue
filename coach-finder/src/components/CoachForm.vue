@@ -57,6 +57,8 @@
 export default {
   name: 'CoachForm',
 
+  emits: ['save-data'],
+
   data() {
     return {
       firstName: '',
@@ -77,7 +79,7 @@ export default {
         areas: this.areas,
       };
 
-      console.log('form data: ', formData);
+      this.$emit('save-data', formData);
     },
   },
 };
