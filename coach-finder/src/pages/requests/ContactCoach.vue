@@ -58,7 +58,7 @@ export default {
         };
 
         this.contactCoach(request);
-        this.$router.replace('/coaches');
+        this.$router.replace('/requests');
       }
     },
   },
