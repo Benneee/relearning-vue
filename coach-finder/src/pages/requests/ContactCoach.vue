@@ -19,13 +19,14 @@
         Please enter a valid email and message
       </p>
       <div class="actions">
-        <base-card>Send Message</base-card>
+        <base-button>Send Message</base-button>
       </div>
     </form>
   </section>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 export default {
   name: 'ContactCoach',
 
@@ -38,11 +39,26 @@ export default {
   },
 
   methods: {
+    ...mapActions('requests', ['contactCoach']),
+
     submitForm() {
       this.formIsValid = true;
-      if (this.email || !this.email.includes('@') || this.message === '') {
+      if (
+        this.email === '' ||
+        !this.email.includes('@') ||
+        this.message === ''
+      ) {
         this.formIsValid = false;
         return;
+      } else {
+        const request = {
+          email: this.email,
+          message: this.message,
+          coachId: this.$route.params.id,
+        };
+
+        this.contactCoach(request);
+        this.$router.replace('/coaches');
       }
     },
   },
