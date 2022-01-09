@@ -3,6 +3,7 @@ export default {
 
   state() {
     return {
+      lastFetch: null,
       coaches: [],
     };
   },
@@ -15,6 +16,10 @@ export default {
     // Mutation to save fetched coaches in state
     setCoaches(state, payload) {
       state.coaches = payload;
+    },
+
+    setFetchTimestamp(state) {
+      state.lastFetch = new Date().getTime();
     },
   },
 
@@ -31,6 +36,16 @@ export default {
       const coaches = getters.coaches;
       const userId = rootGetters.userId;
       return coaches.some((coach) => coach.id === userId);
+    },
+
+    shouldUpdate(state) {
+      const lastFetch = state.lastFetch;
+      if (!lastFetch) {
+        return true;
+      } else {
+        const currentTimeStamp = new Date().getTime();
+        return (currentTimeStamp - state.lastFetch) / 1000 > 60;
+      }
     },
   },
 
@@ -69,7 +84,11 @@ export default {
       }
     },
 
-    async getCoaches(context) {
+    async getCoaches(context, payload) {
+      if (!payload.forceRefresh && !context.getters.shouldUpdate) {
+        return;
+      }
+
       const coachesRequest = await fetch(
         'https://coach-finder-5bd90-default-rtdb.firebaseio.com/coaches.json',
       );
@@ -96,6 +115,7 @@ export default {
         }
 
         context.commit('setCoaches', coaches);
+        context.commit('setFetchTimestamp');
       }
     },
   },
