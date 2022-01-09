@@ -30,6 +30,11 @@ export default {
     registerCoach(state, payload) {
       state.coaches.push(payload);
     },
+
+    // Mutation to save fetched coaches in state
+    setCoaches(state, payload) {
+      state.coaches = payload;
+    },
   },
 
   getters: {
@@ -80,6 +85,34 @@ export default {
           ...coach,
           id: userId,
         });
+      }
+    },
+
+    async getCoaches(context) {
+      const coachesRequest = await fetch(
+        'https://coach-finder-5bd90-default-rtdb.firebaseio.com/coaches.json',
+      );
+      if (!coachesRequest.ok) {
+        console.log('error occurred');
+      } else {
+        const coachesData = await coachesRequest.json();
+
+        const coaches = [];
+
+        for (const key in coachesData) {
+          const coach = {
+            firstName: coachesData[key].firstName,
+            lastName: coachesData[key].lastName,
+            description: coachesData[key].description,
+            hourlyRate: coachesData[key].hourlyRate,
+            areas: coachesData[key].areas,
+            id: key,
+          };
+
+          coaches.push(coach);
+        }
+
+        context.commit('setCoaches', coaches);
       }
     },
   },
