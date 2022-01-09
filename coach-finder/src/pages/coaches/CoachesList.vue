@@ -4,7 +4,7 @@
     <div>
       <base-card>
         <div class="controls">
-          <base-button mode="outline">Refresh</base-button>
+          <base-button mode="outline" @click="getCoaches">Refresh</base-button>
           <base-button link to="/register" v-if="!isCoach"
             >Register as coach
           </base-button>
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import CoachItem from '../../components/coaches/CoachItem.vue';
 import CoachFilter from './CoachFilter.vue';
 
@@ -60,7 +60,13 @@ export default {
     },
   },
 
+  created() {
+    this.getCoaches();
+  },
+
   methods: {
+    ...mapActions('coaches', ['getCoaches']),
+
     setFilters(updatedFilters) {
       this.activeFilters = updatedFilters;
     },
