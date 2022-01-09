@@ -1,12 +1,12 @@
 <template>
-  <section>
-    <button v-if="!link" :class="mode">
-      <slot />
-    </button>
-    <router-link v-else :to="to" :class="mode">
-      <slot />
-    </router-link>
-  </section>
+  <!-- <div> -->
+  <button v-if="!link" :class="mode">
+    <slot />
+  </button>
+  <router-link v-else :to="to" :class="mode">
+    <slot />
+  </router-link>
+  <!-- </div> -->
 </template>
 
 <script>
