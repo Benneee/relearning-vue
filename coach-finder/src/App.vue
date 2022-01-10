@@ -10,11 +10,25 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 import TheHeader from './components/layout/TheHeader.vue';
 export default {
   name: 'App',
   components: {
     TheHeader,
+  },
+
+  created() {
+    this.tryLogin();
+  },
+
+  methods: {
+    ...mapActions(['tryAutoLogin']),
+
+    tryLogin() {
+      this.tryAutoLogin();
+    },
   },
 };
 </script>
