@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 import TheHeader from './components/layout/TheHeader.vue';
 export default {
@@ -19,8 +19,21 @@ export default {
     TheHeader,
   },
 
+  computed: {
+    ...mapGetters(['isAutoLoggedOut']),
+  },
+
   created() {
     this.tryLogin();
+  },
+
+  // Redirect the user to the coaches page if auto-logged out
+  watch: {
+    isAutoLoggedOut(currValue, oldValue) {
+      if (currValue && currValue !== oldValue) {
+        this.$router.replace('/coaches');
+      }
+    },
   },
 
   methods: {
