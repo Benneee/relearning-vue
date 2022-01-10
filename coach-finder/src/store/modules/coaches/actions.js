@@ -15,8 +15,12 @@ export default {
 
     // So Instead of sending the coach data to a general pool of coaches data,
     // we send it to a personalised column for the coach which is marked by the coach's userId
+
+    // This endpoint is a restricted endpoint, so we need to attach the auth token to it.
+    const token = context.rootGetters.token;
+
     const coachResponse = await fetch(
-      `https://coach-finder-5bd90-default-rtdb.firebaseio.com/coaches/${userId}.json`,
+      `https://coach-finder-5bd90-default-rtdb.firebaseio.com/coaches/${userId}.json?auth=${token}`,
       {
         method: 'PUT', // If this data already exists in the DB, It'll be overwritten, if not, create it
         body: JSON.stringify(coach),
