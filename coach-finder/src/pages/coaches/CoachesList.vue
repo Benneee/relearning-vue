@@ -22,8 +22,12 @@
             v-if="isAuthenticated && !isCoach && !isLoading"
             >Register as coach
           </base-button>
-          <base-button link to="/auth" v-if="!isAuthenticated">
-            Login
+          <base-button
+            link
+            to="/auth?redirect=register"
+            v-if="!isAuthenticated"
+          >
+            Login to Register as a Coach
           </base-button>
         </div>
         <div v-if="isLoading">

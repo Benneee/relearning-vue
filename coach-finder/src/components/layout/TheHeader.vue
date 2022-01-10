@@ -38,7 +38,7 @@ export default {
 
     logUserOut() {
       this.logout();
-      this.$router.replace('/auth');
+      this.$router.replace('/coaches');
     },
   },
 };

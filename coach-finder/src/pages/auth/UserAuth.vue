@@ -96,10 +96,13 @@ export default {
           // send HTTP request
           if (this.mode === 'login') {
             await this.login(authPayload);
-            this.$router.push('/coaches');
           } else {
             await this.signup(authPayload);
           }
+          const redirectUrl = `/${this.$route.query.redirect}`;
+          redirectUrl !== '/undefined'
+            ? this.$router.replace(redirectUrl)
+            : this.$router.replace('/coaches');
         } catch (err) {
           this.error = err.message || 'Failed to authenticate!';
         }
