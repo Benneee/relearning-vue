@@ -96,6 +96,7 @@ export default {
           // send HTTP request
           if (this.mode === 'login') {
             await this.login(authPayload);
+            this.$router.push('/coaches');
           } else {
             await this.signup(authPayload);
           }
