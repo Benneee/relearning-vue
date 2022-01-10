@@ -1,5 +1,17 @@
 <template>
   <section>
+    <!-- fixed because we don't want the dialog to be dismissed by clicking the overlay -->
+    <base-dialog fixed :show="isLoading" title="Authenticating...">
+      <base-spinner></base-spinner>
+    </base-dialog>
+
+    <base-dialog
+      :show="!!error"
+      title="An error occurred!"
+      @close="handleError"
+    >
+      <p>{{ error }}</p>
+    </base-dialog>
     <form @submit.prevent="submitForm">
       <base-card>
         <div class="form-control">
@@ -38,6 +50,8 @@ export default {
       password: '',
       formIsValid: true,
       mode: 'login',
+      isLoading: false,
+      error: null,
     };
   },
 
@@ -62,7 +76,7 @@ export default {
   methods: {
     ...mapActions(['signup']),
 
-    submitForm() {
+    async submitForm() {
       this.formIsValid = true;
       if (
         this.email === '' ||
@@ -72,16 +86,23 @@ export default {
         this.formIsValid = false;
         return;
       } else {
-        console.log('form valid');
-        // send HTTP request
-        if (this.mode === 'login') {
-          // Do login stuff here
-        } else {
-          this.signup({
-            email: this.email,
-            password: this.password,
-          });
+        this.isLoading = true;
+
+        try {
+          // send HTTP request
+          if (this.mode === 'login') {
+            // Do login stuff here
+          } else {
+            await this.signup({
+              email: this.email,
+              password: this.password,
+            });
+          }
+        } catch (err) {
+          this.error = err.message || 'Failed to authenticate!';
         }
+
+        this.isLoading = false;
       }
     },
 
@@ -91,6 +112,10 @@ export default {
       } else {
         this.mode = 'login';
       }
+    },
+
+    handleError() {
+      this.error = null;
     },
   },
 };
