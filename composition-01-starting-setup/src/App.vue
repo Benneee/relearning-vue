@@ -12,9 +12,9 @@
     <button @click="setJerseyNumber">Change Jersey Number</button>
 
     <div>
-      <input type="text" @input="setFirstName" placeholder="Enter first name" />
+      <input type="text" v-model="firstName" placeholder="Enter first name" />
       &nbsp;
-      <input type="text" @input="setLastName" placeholder="Enter last name" />
+      <input type="text" v-model="lastName" placeholder="Enter last name" />
     </div>
   </section>
 </template>
@@ -73,14 +73,6 @@ export default {
       club.jerseyNumber = 15;
     }
 
-    function setFirstName(e) {
-      firstName.value = e.target.value;
-    }
-
-    function setLastName(e) {
-      lastName.value = e.target.value;
-    }
-
     // For computed properties, we work with a "computed" method imported from vue
     // that receives a function that returns the computed value we desire
     // The name of the computed method's function should be the name of the computed property in
@@ -94,8 +86,6 @@ export default {
       user,
       club,
       setJerseyNumber,
-      setFirstName,
-      setLastName,
       firstName,
       lastName,
     };
