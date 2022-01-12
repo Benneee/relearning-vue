@@ -7,6 +7,9 @@
 
     <h3>Supports {{ club.name }}</h3>
     <h3>Best player: {{ club.player }}</h3>
+    <h3>Jersey Number: {{ club.jerseyNumber }}</h3>
+
+    <button @click="setJerseyNumber">Change Jersey Number</button>
   </section>
 </template>
 
@@ -42,15 +45,24 @@ export default {
     });
 
     // To show that ref is reactive
-    setTimeout(() => {
-      userName.value = 'Max';
-      user.value.hobby = 'gaming';
-      user.value.address = 'sydney';
+    // setTimeout(() => {
+    //   userName.value = 'Max';
+    //   user.value.hobby = 'gaming';
+    //   user.value.address = 'sydney';
 
-      club.position = 'forward';
-      club.player = 'salah';
-      club.jerseyNumber = 11;
-    }, 3000);
+    //  shows that using "reactive" for objects is a less stressful approach
+    //   club.position = 'forward';
+    //   club.player = 'salah';
+    //   club.jerseyNumber = 11;
+    // }, 3000);
+
+    // For methods, normally, we would create a methods object and
+    // house all our needed methods inside it
+    // Here, the needed methods are written as simple JavaScript functions
+    // and added in the return object
+    function setJerseyNumber() {
+      club.jerseyNumber = 15;
+    }
 
     // You need to return what you want to expose to the template in the return object
     return {
@@ -58,6 +70,7 @@ export default {
       age: userAge,
       user,
       club,
+      setJerseyNumber,
     };
   },
 };
