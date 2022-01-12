@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { ref, reactive, computed } from 'vue';
+import { ref, reactive, computed, watch, toRefs } from 'vue';
 export default {
   // data() {
   //   return {
@@ -53,6 +53,8 @@ export default {
       name: 'liverpool fc',
     });
 
+    const newClub = toRefs(club);
+
     // To show that ref is reactive
     // setTimeout(() => {
     //   userName.value = 'Max';
@@ -79,6 +81,24 @@ export default {
     // the template
     const userName = computed(() => `${firstName.value} ${lastName.value}`);
 
+    // The watch property here is also imported as a method from vue.
+    // It receives two arguments, first arg is what value we are tracking for a change
+    // Second arg is the function that should run when first arg changes
+    // The second arg receives two arguments which are the newValue and oldValue
+    watch(newClub.jerseyNumber, (newValue, oldValue) => {
+      console.log('old age: ', oldValue);
+      console.log('new age: ', newValue);
+    });
+
+    // You can add an array of dependencies with this watch method
+    // The values however become a list of values and can be
+    // accessed with indexes based on the order of the items in the array
+    watch([newClub.jerseyNumber, newClub.name], (newValue, oldValue) => {
+      console.log('old age[0]: ', oldValue[0]);
+      console.log('old age[1]: ', oldValue[1]);
+      console.log('new age[0]: ', newValue[0]);
+      console.log('new age[1]: ', newValue[1]);
+    });
     // You need to return what you want to expose to the template in the return object
     return {
       userName,
