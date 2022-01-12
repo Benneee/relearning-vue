@@ -10,11 +10,17 @@
     <h3>Jersey Number: {{ club.jerseyNumber }}</h3>
 
     <button @click="setJerseyNumber">Change Jersey Number</button>
+
+    <div>
+      <input type="text" @input="setFirstName" placeholder="Enter first name" />
+      &nbsp;
+      <input type="text" @input="setLastName" placeholder="Enter last name" />
+    </div>
   </section>
 </template>
 
 <script>
-import { ref, reactive } from 'vue';
+import { ref, reactive, computed } from 'vue';
 export default {
   // data() {
   //   return {
@@ -23,8 +29,11 @@ export default {
   // },
 
   setup() {
-    const userName = ref('Maximilian');
+    // const userName = ref('Maximilian');
     const userAge = ref(31);
+
+    const firstName = ref('');
+    const lastName = ref('');
 
     // To use ref with objects
     const user = ref({
@@ -64,6 +73,20 @@ export default {
       club.jerseyNumber = 15;
     }
 
+    function setFirstName(e) {
+      firstName.value = e.target.value;
+    }
+
+    function setLastName(e) {
+      lastName.value = e.target.value;
+    }
+
+    // For computed properties, we work with a "computed" method imported from vue
+    // that receives a function that returns the computed value we desire
+    // The name of the computed method's function should be the name of the computed property in
+    // the template
+    const userName = computed(() => `${firstName.value} ${lastName.value}`);
+
     // You need to return what you want to expose to the template in the return object
     return {
       userName,
@@ -71,6 +94,10 @@ export default {
       user,
       club,
       setJerseyNumber,
+      setFirstName,
+      setLastName,
+      firstName,
+      lastName,
     };
   },
 };
