@@ -1,7 +1,6 @@
 <template>
   <section class="container">
-    <h2>{{ userName }}</h2>
-    <h3>{{ age }}</h3>
+    <UserData :firstName="firstName" :lastName="lastName" :age="age" />
     <h3>Lives at {{ user.address }}</h3>
     <h3>Enjoys {{ user.hobby }}</h3>
 
@@ -20,8 +19,10 @@
 </template>
 
 <script>
-import { ref, reactive, computed, watch, toRefs } from 'vue';
+import { ref, reactive, watch, toRefs } from 'vue';
+import UserData from './components/UserData.vue';
 export default {
+  components: { UserData },
   // data() {
   //   return {
   //     userName: 'Maximilian',
@@ -79,7 +80,8 @@ export default {
     // that receives a function that returns the computed value we desire
     // The name of the computed method's function should be the name of the computed property in
     // the template
-    const userName = computed(() => `${firstName.value} ${lastName.value}`);
+
+    // const userName = computed(() => `${firstName.value} ${lastName.value}`);
 
     // The watch property here is also imported as a method from vue.
     // It receives two arguments, first arg is what value we are tracking for a change
@@ -101,7 +103,6 @@ export default {
     });
     // You need to return what you want to expose to the template in the return object
     return {
-      userName,
       age: userAge,
       user,
       club,
