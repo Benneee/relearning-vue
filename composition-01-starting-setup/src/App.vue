@@ -1,6 +1,6 @@
 <template>
   <section class="container">
-    <UserData :firstName="firstName" :lastName="lastName" :age="age" />
+    <UserData class="" :firstName="firstName" :lastName="lastName" :age="age" />
     <h3>Lives at {{ user.address }}</h3>
     <h3>Enjoys {{ user.hobby }}</h3>
 
