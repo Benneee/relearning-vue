@@ -1,6 +1,11 @@
 <template>
   <section class="container">
-    <UserData :firstName="firstName" :lastName="lastName" :age="age" />
+    <UserData
+      v-if="club.jerseyNumber !== 15"
+      class=""
+      :firstName="firstName"
+      :lastName="lastName"
+    />
     <h3>Lives at {{ user.address }}</h3>
     <h3>Enjoys {{ user.hobby }}</h3>
 
@@ -19,7 +24,7 @@
 </template>
 
 <script>
-import { ref, reactive, watch, toRefs } from 'vue';
+import { ref, reactive, watch, toRefs, provide } from 'vue';
 import UserData from './components/UserData.vue';
 export default {
   components: { UserData },
@@ -82,6 +87,12 @@ export default {
     // the template
 
     // const userName = computed(() => `${firstName.value} ${lastName.value}`);
+
+    // To use provide and inject within setup, we import the provide method
+    // in the provider component, which in this case is a method
+    // We pass in two arguments, a key for identification at the point of
+    // injection and a value
+    provide('userAge', userAge);
 
     // The watch property here is also imported as a method from vue.
     // It receives two arguments, first arg is what value we are tracking for a change
