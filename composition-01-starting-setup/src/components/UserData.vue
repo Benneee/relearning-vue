@@ -6,11 +6,11 @@
 </template>
 
 <script>
-import { computed } from 'vue';
+import { computed, inject } from 'vue';
 
 export default {
   name: 'UserData',
-  props: ['firstName', 'lastName', 'age'],
+  props: ['firstName', 'lastName'],
 
   //   To work with props in setup
   setup(props, context) {
@@ -24,8 +24,15 @@ export default {
     // slots => contains all the slots available in this component, if any
     // emit => a method we can use to emit custom events from this component within setup
 
+    // To use provide and inject:
+    // this is the receiving component, so we import inject here
+    // then pass in the same key as was used in the provider component
+    const age = inject('userAge');
+    // Also, you should only update an injected value in the component it was provided
+
     return {
       userName,
+      age,
     };
   },
 };
