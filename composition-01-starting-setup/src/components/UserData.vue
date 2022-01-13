@@ -6,7 +6,16 @@
 </template>
 
 <script>
-import { computed, inject } from 'vue';
+import {
+  computed,
+  inject,
+  onBeforeMount,
+  onMounted,
+  onBeforeUpdate,
+  onUpdated,
+  onBeforeUnmount,
+  onUnmounted,
+} from 'vue';
 
 export default {
   name: 'UserData',
@@ -29,6 +38,14 @@ export default {
     // then pass in the same key as was used in the provider component
     const age = inject('userAge');
     // Also, you should only update an injected value in the component it was provided
+
+    // For lifecycle hooks, you pass in a function expected to run during that particular life cycle
+    onBeforeMount(() => console.log('onBeforeMount'));
+    onMounted(() => console.log('onMounted'));
+    onBeforeUpdate(() => console.log('onBeforeUpdate'));
+    onUpdated(() => console.log('onUpdated'));
+    onBeforeUnmount(() => console.log('onBeforeUnmount'));
+    onUnmounted(() => console.log('onUnmounted'));
 
     return {
       userName,

@@ -1,6 +1,11 @@
 <template>
   <section class="container">
-    <UserData class="" :firstName="firstName" :lastName="lastName" />
+    <UserData
+      v-if="club.jerseyNumber !== 15"
+      class=""
+      :firstName="firstName"
+      :lastName="lastName"
+    />
     <h3>Lives at {{ user.address }}</h3>
     <h3>Enjoys {{ user.hobby }}</h3>
 
