@@ -1,14 +1,22 @@
 import { ref, computed, watch } from 'vue';
 
-export function useSearch(items, searchProp) {
+export default function useSearch(items, searchProp) {
   const enteredSearchTerm = ref('');
   const activeSearchTerm = ref('');
 
-  function updateSearch(val) {
-    enteredSearchTerm.value = val;
-  }
+  const availableItems = computed(function() {
+    let filteredItems = [];
+    if (activeSearchTerm.value) {
+      filteredItems = items.value.filter(item =>
+        item[searchProp].includes(activeSearchTerm.value)
+      );
+    } else if (items.value) {
+      filteredItems = items.value;
+    }
+    return filteredItems;
+  });
 
-  watch(enteredSearchTerm, (newValue) => {
+  watch(enteredSearchTerm, function(newValue) {
     setTimeout(() => {
       if (newValue === enteredSearchTerm.value) {
         activeSearchTerm.value = newValue;
@@ -16,21 +24,13 @@ export function useSearch(items, searchProp) {
     }, 300);
   });
 
-  const availableItems = computed(() => {
-    let filteredItems = [];
-    if (activeSearchTerm.value) {
-      filteredItems = items.filter((item) =>
-        item[searchProp].includes(activeSearchTerm.value)
-      );
-    } else if (items) {
-      filteredItems = items;
-    }
-    return filteredItems;
-  });
+  function updateSearch(val) {
+    enteredSearchTerm.value = val;
+  }
 
   return {
     enteredSearchTerm,
-    updateSearch,
     availableItems,
+    updateSearch
   };
 }
